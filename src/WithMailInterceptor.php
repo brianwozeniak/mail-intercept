@@ -2,6 +2,7 @@
 
 namespace KirschbaumDevelopment\MailIntercept;
 
+use Illuminate\Mail\Mailer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use KirschbaumDevelopment\MailIntercept\Assertions\CcAssertions;
@@ -43,6 +44,6 @@ trait WithMailInterceptor
      */
     public function interceptedMail(): Collection
     {
-        return app('swift.transport')->driver()->messages();
+        return app(Mailer::class)->getSwiftMailer()->getTransport()->messages();
     }
 }
